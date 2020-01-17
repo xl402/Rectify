@@ -6,4 +6,4 @@
 * Clone by running: `git clone https://github.com/xl402/Rectify.git`
 * After cloning, run: `conda env create -f environment.yml`
 * Ask for `secrete.json` containing gmail login and passowrds, and store at root directory
-* Create gitignore file `.gitignore` and add entry `secrete.json`
+* Create gitignore file `.gitignore` and add entry `secret.json`

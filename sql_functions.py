@@ -181,7 +181,8 @@ def get_consecutive_days(userID, config):
     
     
 def check_reward(userID, threshold, config):
-    if get_consecutive_days(userID, config) % threshold:
+    num = get_consecutive_days(userID, config)
+    if num % threshold and num!=0:
         return False
     else:
         return True

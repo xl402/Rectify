@@ -181,7 +181,10 @@ def get_consecutive_days(userID, config):
     
     
 def check_reward(userID, threshold, config):
-    return get_consecutive_days(userID, config) > threshold
+    if get_consecutive_days(userID, config) % threshold:
+        return False
+    else:
+        return True
     
 
 def get_history(userID, config):
@@ -250,3 +253,33 @@ def clear_items(userID, config):
 
         return
 
+def set_consecutive_days(userID, N, config):
+    # Construct connection string
+    try:
+        conn = mysql.connector.connect(**config)
+        #print("Connection established")
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with the user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+    else:
+        cursor = conn.cursor()
+
+        update_query = """UPDATE users
+                          SET consecutive_days = %s
+                          WHERE userID = %s
+                       """
+            
+        cursor.execute(update_query, (N, userID))
+        print('User', str(userID), 'consecutive_days => ' + str(N))
+
+        # Cleanup
+        conn.commit()
+        cursor.close()
+        conn.close()
+        print("Done.")
+        
+        return

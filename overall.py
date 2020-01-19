@@ -8,7 +8,7 @@ def get_object_list(image_dir):
     locs = get_boxes(image_dir)
 
     # Extract each object into its own image
-    image_cut_saver(locs, image_dir)
+    image_cut_saver(locs)
 
     # Get a class prediction for each image
     # Set percentage threshold

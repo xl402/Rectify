@@ -32,6 +32,7 @@ def multiple_predict(threshold):
     supported_list = ['banana', 'orange', 'mixing_bowl', 'soup_bowl', 'washbowl', 'washbasin', 'handbasin', 'lavabo', 'wash-hand basin', 'custard apple','pomegranate', 'beer_bottle', 'pop_bottle', 'soda_bottle', 'water_bottle', 'wine_bottle', 'sundial', 'bathtub']
     objects = [i for i in objects if i in supported_list]
     objects = [i if i not in ['pomegranate', 'custard apple', 'sundial'] else 'apple' for i in objects]
+    objects = [i if i not in ['lemon'] else 'orange' for i in objects]
     objects = [i if i not in ['pop_bottle', 'soda_bottle', 'wine_bottle'] else 'water_bottle' for i in objects]
     objects = [i if i not in ['soup_bowl', 'washbowl', 'washbasin', 'handbasin', 'bathtub'] else 'mixing_bowl' for i in objects]
     objects = list(set(objects))

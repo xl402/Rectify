@@ -20,7 +20,7 @@ def multiple_predict(threshold):
     for each_result in results_array:
         predictions, percentage_probabilities = each_result["predictions"], each_result["percentage_probabilities"]
         for index in range(len(predictions)):
-            #print(predictions[index] , " : " , percentage_probabilities[index])
+            print(predictions[index] , " : " , percentage_probabilities[index])
             prob = percentage_probabilities[index]
             if prob > threshold:
                 objects.append(predictions[index])
@@ -35,7 +35,5 @@ def multiple_predict(threshold):
     objects = [i if i not in ['pop_bottle', 'soda_bottle', 'wine_bottle'] else 'water_bottle' for i in objects]
     objects = [i if i not in ['soup_bowl', 'washbowl', 'washbasin', 'handbasin', 'bathtub'] else 'mixing_bowl' for i in objects]
     objects = list(set(objects))
-    shutil.rmtree(execution_path+"/adian")
-    os.makedirs(execution_path+"/adian")
     
     return objects

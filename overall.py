@@ -12,7 +12,7 @@ def get_object_list(image_dir):
 
     # Get a class prediction for each image
     # Set percentage threshold
-    THRESHOLD = 95
+    THRESHOLD = 20
     objects = multiple_predict(THRESHOLD)
 
     return objects

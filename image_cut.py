@@ -10,11 +10,9 @@ for f in files:
 
 def image_cut_saver(coordinate_list, image_dir):
     image = io.imread(image_dir)
-    print(image.shape)
     for i in range(len(coordinate_list)):
         coordinates = coordinate_list[i]
         cropped = image[coordinates[1]:coordinates[3], coordinates[0]:coordinates[2]]
-
-
-        im_name = "adian/test" + str(i) + ".jpg"
-        io.imsave(im_name, cropped)
+        if cropped.shape[0]!=0:
+            im_name = "adian/test" + str(i) + ".jpg"
+            io.imsave(im_name, cropped)

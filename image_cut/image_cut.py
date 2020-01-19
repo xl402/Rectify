@@ -9,5 +9,6 @@ for i in range(len(coordinate_list)):
     cropped = image[coordinates[0]:coordinates[1], coordinates[2]:coordinates[3]]
     io.imshow(cropped)
     im_name = "test_" + str(i) + ".jpg"
+    print(len(cropped), cropped.shape)
     io.imsave(im_name, cropped)
     print("yo")

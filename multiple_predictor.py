@@ -1,5 +1,6 @@
 from imageai.Prediction import ImagePrediction
 import os
+import shutil
 
 def multiple_predict(threshold):
 
@@ -19,12 +20,22 @@ def multiple_predict(threshold):
     for each_result in results_array:
         predictions, percentage_probabilities = each_result["predictions"], each_result["percentage_probabilities"]
         for index in range(len(predictions)):
-            print(predictions[index] , " : " , percentage_probabilities[index])
+            #print(predictions[index] , " : " , percentage_probabilities[index])
             prob = percentage_probabilities[index]
             if prob > threshold:
                 objects.append(predictions[index])
-        print("-----------------------")
+        #print("-----------------------")
 
     # Remove duplicates
-    objects = list(dict.fromkeys(objects))
+    #objects = list(dict.fromkeys(objects))
+    objects = list(set(objects))
+    supported_list = ['banana', 'orange', 'mixing_bowl', 'soup_bowl', 'washbowl', 'washbasin', 'handbasin', 'lavabo', 'wash-hand basin', 'custard apple','pomegranate', 'beer_bottle', 'pop_bottle', 'soda_bottle', 'water_bottle', 'wine_bottle', 'sundial', 'bathtub']
+    objects = [i for i in objects if i in supported_list]
+    objects = [i if i not in ['pomegranate', 'custard apple', 'sundial'] else 'apple' for i in objects]
+    objects = [i if i not in ['pop_bottle', 'soda_bottle', 'wine_bottle'] else 'water_bottle' for i in objects]
+    objects = [i if i not in ['soup_bowl', 'washbowl', 'washbasin', 'handbasin', 'bathtub'] else 'mixing_bowl' for i in objects]
+    objects = list(set(objects))
+    shutil.rmtree(execution_path+"/adian")
+    os.makedirs(execution_path+"/adian")
+    
     return objects

@@ -3,7 +3,7 @@ import time
 import pickle
 
 def read_item_list():
-    with open("item_list.pkl", "rb") as fp:   # Unpickling
+    with open("item_list.txt", "rb") as fp:   # Unpickling
         item_list = pickle.load(fp)
 
     recyclable_dict = {"apple": 0, "banana": 0, "orange":0, "water_bottle":1, "mixing_bowl":1}
@@ -16,6 +16,10 @@ def read_status():
         text = f.read()
     return(text)
 
+def read_email_status():
+    with open("status_email.txt", "rb") as f:
+        text = f.read()
+    return(text)
 
 win = tk.Tk()
 frame = tk.Frame(win)
@@ -38,5 +42,9 @@ while True:
 
     status = read_status()
     tk.Label(frame, text=status, font=("Arial Bold", 20), bg="yellow", fg="black", relief="solid", borderwidth=1, width=30).grid(row=0, column=1)
+
+    email_status = read_email_status()
+    tk.Label(frame, text=status, font=("Arial Bold", 20), bg="light green", fg="black", relief="solid", borderwidth=1, width=30).grid(row=1, column=1)
+
     win.update()
     frame.after(3000)
